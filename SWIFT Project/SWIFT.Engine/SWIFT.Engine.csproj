@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SWIFT.Entities\SWIFT.Entities.csproj" />
     <ProjectReference Include="..\SWIFT.Main\SWIFT.Main.csproj" />
   </ItemGroup>
 
