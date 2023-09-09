@@ -21,8 +21,17 @@ namespace SWIFT.Main
 
             if (message.Contains("{3:"))
             {
-                string thirdBlock = StringHelper.BetweenStrings(message, ":{", "}");
-                swiftMessage.Add("UserHeader", thirdBlock);
+                if(!message.Contains("}}"))
+                {
+                    string thirdBlock = StringHelper.BetweenStrings(message, ":{", "}");
+                    swiftMessage.Add("UserHeader", thirdBlock);
+                }
+                else
+                {
+                    var firstPart = StringHelper.BetweenStrings(message, ":{", "}");
+                    var secondPart = StringHelper.BetweenStrings(message, firstPart + "}{", "}}");
+                    swiftMessage.Add("UserHeader", string.Concat(firstPart + " ", secondPart));
+                }
             }
 
             if (message.Contains("{4:"))

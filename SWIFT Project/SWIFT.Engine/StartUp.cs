@@ -22,13 +22,13 @@ namespace SWIFT.Engine
                     strResult = streamReader.ReadToEnd();
                     var parser = new Parser();
                     var messagesInfo = parser.SeparateTxtFile(strResult.Trim());
-                    var appHeader = new ApplicationHeader(messagesInfo["ApplicationHeader"]);
-                    Console.WriteLine(appHeader.MessagePriority);
-                    //O1001200970103BANKBEBBAXXX22221234569701031201N
+                    var userHeader = new UserHeader(messagesInfo["UserHeader"]);
+                    Console.WriteLine(userHeader.IsM103Triggered);
+                    Console.WriteLine(userHeader.BankingPriorityCode);
+                    Console.WriteLine(userHeader.Mur);
+
                 }
             }
-
-
 
         }
     }

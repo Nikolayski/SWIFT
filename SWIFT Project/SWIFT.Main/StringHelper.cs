@@ -1,4 +1,6 @@
-﻿namespace SWIFT.Main
+﻿using System.Linq;
+
+namespace SWIFT.Main
 {
     public static class StringHelper
     {
@@ -24,6 +26,11 @@
 
             return value.Substring(updatedStartIndex, endIndex - updatedStartIndex);
 
+        }
+
+        public static int SumLengths(params string[] words)
+        {
+            return words.Sum(x => x.Length);
         }
     }
 }

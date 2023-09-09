@@ -1,4 +1,6 @@
-﻿namespace SWIFT.Entities
+﻿using SWIFT.Main;
+
+namespace SWIFT.Entities
 {
     public class BasicHeader
     {
@@ -9,18 +11,21 @@
         private string sequenceNumber;
         private string message;
 
-        public BasicHeader()
-        {
 
-        }
         public BasicHeader(string message)
         {
             this.message = message;
             this.applicationId = this.message.Substring(0, 1);
-            this.serviceId = this.message.Substring(1, 2);
-            this.ltAddress = this.message.Substring(3, 12);
-            this.sessionNumber = this.message.Substring(15, 4);
-            this.sequenceNumber = this.message.Substring(19, 6);
+            this.serviceId = this.message.Substring(this.applicationId.Length, 2);
+
+            var ltAddressStartIndex = StringHelper.SumLengths(this.applicationId, this.serviceId);
+            this.ltAddress = this.message.Substring(ltAddressStartIndex, 12);
+
+            var sessionNumberStartIndex = StringHelper.SumLengths(this.applicationId, this.serviceId, this.ltAddress);
+            this.sessionNumber = this.message.Substring(sessionNumberStartIndex, 4);
+
+            var sequenceNumberStartIndex = StringHelper.SumLengths(this.applicationId, this.serviceId, this.ltAddress, this.sessionNumber);
+            this.sequenceNumber = this.message.Substring(sequenceNumberStartIndex, 6);
         }
         public string ApplicationId
         {
