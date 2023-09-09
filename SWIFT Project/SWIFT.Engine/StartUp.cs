@@ -23,6 +23,7 @@ namespace SWIFT.Engine
                     var parser = new Parser();
                     var messagesInfo = parser.SeparateTxtFile(strResult.Trim());
                     var textHeader = new TextHeader(messagesInfo["TextBlock"]);
+                    Console.WriteLine(textHeader.TextTags["20"]);
 
                 }
             }

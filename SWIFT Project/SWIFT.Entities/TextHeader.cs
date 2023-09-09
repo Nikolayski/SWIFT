@@ -30,6 +30,8 @@ namespace SWIFT.Entities
             PopulateTextTagsValues(textColumns);
         }
 
+        public Dictionary<string, string> TextTags => this.textTags;
+
         private void PopulateTextTagsValues(List<string> textColumns)
         {
             foreach (var textColumn in textColumns)
