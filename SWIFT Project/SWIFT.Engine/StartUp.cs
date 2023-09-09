@@ -22,10 +22,7 @@ namespace SWIFT.Engine
                     strResult = streamReader.ReadToEnd();
                     var parser = new Parser();
                     var messagesInfo = parser.SeparateTxtFile(strResult.Trim());
-                    var userHeader = new UserHeader(messagesInfo["UserHeader"]);
-                    Console.WriteLine(userHeader.IsM103Triggered);
-                    Console.WriteLine(userHeader.BankingPriorityCode);
-                    Console.WriteLine(userHeader.Mur);
+                    var textHeader = new TextHeader(messagesInfo["TextBlock"]);
 
                 }
             }

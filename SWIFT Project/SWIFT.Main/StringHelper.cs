@@ -24,7 +24,7 @@ namespace SWIFT.Main
                 return string.Empty;
             }
 
-            return value.Substring(updatedStartIndex, endIndex - updatedStartIndex);
+            return value.Substring(updatedStartIndex, endIndex - updatedStartIndex).Trim();
 
         }
 
