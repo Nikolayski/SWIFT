@@ -1,4 +1,7 @@
-﻿using SWIFT.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using SWIFT.Entities;
 using SWIFT.Main;
 using System;
 using System.IO;
@@ -7,6 +10,42 @@ namespace SWIFT.Engine
 {
     public class StartUp
     {
+        private readonly IConfiguration configuration;
+
+        public StartUp(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            //db
+            services.AddDbContext<ApplicationDbContext>(options =>
+               options.UseSqlServer(
+                   this.configuration.GetConnectionString(@"Server=.;Database=SWIFT;Trusted_Connection=True;MultipleActiveResultSets=true")));
+
+
+            ////automapper
+            //services.AddAutoMapper(typeof(ApplicationProfile).Assembly);
+
+            ////services
+            //services.AddTransient<ISeedService, SeedService>();
+            //services.AddTransient<ISeedProductsService, SeedProductsService>();
+            //services.AddTransient<IProductService, ProductService>();
+            //services.AddTransient<IRoomService, RoomService>();
+            //services.AddTransient<IImageService, ImageService>();
+            //services.AddTransient<ICartService, CartService>();
+            //services.AddTransient<ICommentService, CommentService>();
+            //services.AddTransient<IUsersService, UsersService>();
+            //services.AddTransient<IRecipeService, RecipeService>();
+            //services.AddTransient<IPostService, PostService>();
+            //services.AddTransient<IContactService, ContactService>();
+
+            //services.AddDatabaseDeveloperPageExceptionFilter();
+
+            //services.AddControllersWithViews();
+            //services.AddRazorPages();
+        }
         static void Main(string[] args)
         {
             var currentDirectory = Directory.GetCurrentDirectory();
@@ -27,6 +66,7 @@ namespace SWIFT.Engine
 
                 }
             }
+
 
         }
     }
