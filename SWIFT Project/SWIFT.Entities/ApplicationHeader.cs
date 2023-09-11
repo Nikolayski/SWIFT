@@ -69,13 +69,13 @@ namespace SWIFT.Entities
                 var regexLt = new Regex(@"[A-Z]{4}[A-Z]{2}[0-9A-Z]{2}[0-9A-Z][0-9A-Z]{3}");
                 var matchLt = regexLt.Match(this.mir);
 
-                this.senderBIC = matchLt.ToString().Substring(0, 8);
+                this.senderBIC = matchLt.ToString().Substring(0, 12);
 
-                var senderLTcodeStartIndex = StringHelper.SumLengths(this.senderBIC);
-                this.senderLTCode = matchLt.ToString().Substring(senderLTcodeStartIndex, 1);
+                //var senderLTcodeStartIndex = StringHelper.SumLengths(this.senderBIC);
+                //this.senderLTCode = matchLt.ToString().Substring(senderLTcodeStartIndex, 1);
 
-                var senderBranchStartIndex = StringHelper.SumLengths(this.senderBIC, this.senderLTCode);
-                this.senderBranch = matchLt.ToString().Substring(senderBranchStartIndex, 3);
+                //var senderBranchStartIndex = StringHelper.SumLengths(this.senderBIC, this.senderLTCode);
+                //this.senderBranch = matchLt.ToString().Substring(senderBranchStartIndex, 3);
 
                 this.sessionNumber = this.mir.Substring(18, 4);
                 this.sequenceNumber = this.mir.Substring(this.mir.Length - 6, 6);

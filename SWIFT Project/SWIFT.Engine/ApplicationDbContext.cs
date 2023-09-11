@@ -10,6 +10,7 @@ namespace SWIFT.Engine
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<Transaction> Transaction { get; set; }
+        public DbSet<FileInfo> FileInfo { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

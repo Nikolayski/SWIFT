@@ -37,13 +37,13 @@ namespace SWIFT.Main
             if (message.Contains("{4:"))
             {
                 string fourthBlock = StringHelper.BetweenStrings(message, "{4:", "}");
-                swiftMessage.Add("TextBlock", fourthBlock);
+                swiftMessage.Add("TextHeader", fourthBlock);
             }
 
             if (message.Contains("{5:"))
             {
                 string fifthBlock = StringHelper.BetweenStrings(message, "{5:", "}");
-                swiftMessage.Add("TrailerBlock", fifthBlock);
+                swiftMessage.Add("TrailerHeader", fifthBlock);
             }
 
             return swiftMessage;

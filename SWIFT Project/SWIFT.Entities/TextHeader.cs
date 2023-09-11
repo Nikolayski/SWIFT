@@ -6,6 +6,13 @@ namespace SWIFT.Entities
 {
     public class TextHeader
     {
+        private string name;
+        private string amount;
+        private string operationType;
+        private string currency;
+        private string account;
+        private List<string> textColumns = new List<string>();
+
         private Dictionary<string, string> textTags = new Dictionary<string, string>
         {
             { "20", string.Empty },
@@ -22,7 +29,11 @@ namespace SWIFT.Entities
             { "71A", string.Empty },
         };
 
-        private List<string> textColumns = new List<string>();
+        public string Name => this.name;
+        public string Amount => this.amount;
+        public string OperationType => this.operationType;
+        public string Currency => this.currency;
+        public string Account => this.account;
 
         public TextHeader(string message)
         {
@@ -43,6 +54,21 @@ namespace SWIFT.Entities
                     if (textTags.ContainsKey(tag) && textTags[tag] == "")
                     {
                         textTags[tag] = value;
+                        if(tag == "23B")
+                        {
+                            this.operationType = value.Split(":").Last();
+                        }
+
+                        if (tag == "32A")
+                        {
+                            this.currency = value.Substring(6, 3);
+                            this.amount = value.Substring(9);
+                        }
+
+                        if (tag == "59" || tag == "59A")
+                        {
+                            this.name = value.Split(":").Last();
+                        }
                     }
                 }
             }
