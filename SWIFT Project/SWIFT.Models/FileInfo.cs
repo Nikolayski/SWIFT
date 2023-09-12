@@ -9,7 +9,6 @@ namespace SWIFT.Models
         {
             this.Id = Guid.NewGuid().ToString();
             this.Transactions = new HashSet<Transaction>();
-
         }
         public string Id { get; set; }
 

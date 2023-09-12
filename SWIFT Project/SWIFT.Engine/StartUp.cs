@@ -31,6 +31,7 @@ namespace SWIFT.Engine
         static async Task Main(string[] args)
         {
             var currentDirectory = Directory.GetCurrentDirectory();
+            Console.WriteLine(currentDirectory);
             string mainDirectory = Directory.GetParent(currentDirectory).Parent.Parent.Parent.FullName;
             Console.WriteLine(mainDirectory);
             var dirInfo = new DirectoryInfo(mainDirectory);
@@ -61,8 +62,8 @@ namespace SWIFT.Engine
                     {
                         transaction = transactionService.Create(textHeader.Name, textHeader.Amount, textHeader.OperationType, textHeader.Currency, textHeader.Account, applicationHeader.SenderBIC, basicHeader.LtAddress);
                     }
+                    transaction.FileInfoId = fileInfo.Id;
                     await fileInfoService.AddAsync(fileInfo);
-                    fileInfo.Transactions.Add(transaction);
                     await transactionService.AddAsync(transaction);
                 }
             }
