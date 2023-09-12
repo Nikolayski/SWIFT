@@ -2,7 +2,7 @@
 
 namespace SWIFT.Engine.Migrations
 {
-    public partial class CreateTables : Migration
+    public partial class CreateTransactionAndFiletables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,7 @@ namespace SWIFT.Engine.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Hour = table.Column<int>(type: "int", nullable: false)
+                    Hour = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

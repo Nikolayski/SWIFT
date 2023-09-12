@@ -39,7 +39,7 @@ namespace SWIFT.Engine
             var transactionService = new TransactionService(new ApplicationDbContext());
             foreach (var file in files)
             {
-                var fileName = file.Name;
+                var fileName = file.Name.Replace(".txt", "");
                 var hour = DateTime.Now.ToString("HH:mm:ss");
                 var strResult = string.Empty;
                 using (StreamReader streamReader = File.OpenText(file.ToString()))
@@ -61,10 +61,9 @@ namespace SWIFT.Engine
                     {
                         transaction = transactionService.Create(textHeader.Name, textHeader.Amount, textHeader.OperationType, textHeader.Currency, textHeader.Account, applicationHeader.SenderBIC, basicHeader.LtAddress);
                     }
-
+                    await fileInfoService.AddAsync(fileInfo);
                     fileInfo.Transactions.Add(transaction);
                     await transactionService.AddAsync(transaction);
-                    await fileInfoService.AddAsync(fileInfo);
                 }
             }
 

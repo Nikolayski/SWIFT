@@ -23,8 +23,8 @@ namespace SWIFT.Engine.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Hour")
-                        .HasColumnType("int");
+                    b.Property<string>("Hour")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");

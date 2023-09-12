@@ -9,8 +9,8 @@ using SWIFT.Engine;
 namespace SWIFT.Engine.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230911204157_CreateTables")]
-    partial class CreateTables
+    [Migration("20230912164134_CreateTransactionAndFiletables")]
+    partial class CreateTransactionAndFiletables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,8 +25,8 @@ namespace SWIFT.Engine.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Hour")
-                        .HasColumnType("int");
+                    b.Property<string>("Hour")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
