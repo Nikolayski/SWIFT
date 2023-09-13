@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace SWIFT.Entities
@@ -13,6 +12,11 @@ namespace SWIFT.Entities
         private string currency;
         private string account;
         private string detailsOfCharges;
+        private string exchangeRate;
+        private string orderingCustomer;
+        private string orderingInstitution;
+        private string intermediaryInstitution;
+        private string remittanceInformation;
         private List<string> textColumns = new List<string>();
 
         private Dictionary<string, string> textTags = new Dictionary<string, string>
@@ -38,6 +42,11 @@ namespace SWIFT.Entities
         public string Account => this.account;
         public string SenderReference => this.senderReference;
         public string DetailsOfCharges => this.detailsOfCharges;
+        public string ExchangeRate => this.exchangeRate;
+        public string OrderingCustomer => this.orderingCustomer;
+        public string OrderingInstitution => this.orderingInstitution;
+        public string IntermediaryInstitution => this.intermediaryInstitution;
+        public string RemittanceInformation => this.remittanceInformation;
 
         public TextHeader(string message)
         {
@@ -58,41 +67,51 @@ namespace SWIFT.Entities
                     if (textTags.ContainsKey(tag) && textTags[tag] == "")
                     {
                         textTags[tag] = value;
-                        if (tag == "20")
+                        switch (tag)
                         {
-                            this.senderReference = value.Split(":").Last();
-                        }
-
-                        if (tag == "23B")
-                        {
-                            this.operationType = value.Split(":").Last();
-                        }
-
-                        if (tag == "32A")
-                        {
-                            this.currency = value.Substring(6, 3);
-                            this.amount = value.Substring(9);
-                        }
-
-
-                        if (tag == "57A" || tag == "59B" || tag == "59C" || tag == "59D")
-                        {
-                            this.account = value.Split(":").Last();
-                        }
-
-                        if (tag == "59" || tag == "59A")
-                        {
-                            this.name = value.Split(":").Last();
-                        }
-
-                        if (tag == "71A")
-                        {
-                            this.detailsOfCharges = value.Split(":").Last();
+                            case "20":
+                                this.senderReference = value.Split(":").LastOrDefault();
+                                break;
+                            case "23B":
+                                this.operationType = value.Split(":").LastOrDefault();
+                                break;
+                            case "32A":
+                                this.currency = value.Substring(6, 3);
+                                this.amount = value.Substring(9);
+                                break;
+                            case "36":
+                                this.exchangeRate = value.Split(":").LastOrDefault();
+                                break;
+                            case "50K":
+                                this.orderingInstitution = value.Split(":").LastOrDefault();
+                                break;
+                            case "52A":
+                                this.orderingCustomer = value.Split(":").LastOrDefault();
+                                break;
+                            case "56A":
+                                this.intermediaryInstitution = value.Split(":").LastOrDefault();
+                                break;
+                            case "57A":
+                                this.account = value.Split(":").LastOrDefault();
+                                break;
+                            case "59":
+                                this.name = value.Split(":").LastOrDefault();
+                                break;
+                            case "59A":
+                                this.name = value.Split(":").LastOrDefault();
+                                break;
+                            case "70":
+                                this.remittanceInformation = value.Split(":").LastOrDefault();
+                                break;
+                            case "71A":
+                                this.detailsOfCharges = value.Split(":").LastOrDefault();
+                                break;
+                            default:
+                                break;
                         }
                     }
                 }
             }
-            ;
         }
     }
 }
